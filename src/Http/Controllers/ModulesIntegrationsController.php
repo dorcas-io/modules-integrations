@@ -57,6 +57,7 @@ class ModulesIntegrationsController extends Controller {
         $this->data['installed'] = $installed;
 
         //dd(array($integrations,$availableIntegrations));
+        $this->setViewUiResponse($request);
 
     	return view('modules-integrations::index', $this->data);
     }

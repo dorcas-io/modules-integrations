@@ -166,7 +166,7 @@
                     console.log('Removing Index: ' + index);
                     this.integrations.splice(index, 1);
                 },
-                installed: function (index) {
+                is_installed: function (index) {
                     this.integrations.splice(index, 1);
                 },
 
@@ -249,7 +249,7 @@
 				                console.log(response);
 				                //context.installed = true;
 				                //context.installing = false;
-				                //context.$emit('installed', context.index);
+				                //context.$emit('is_installed', context.index);
 				                //Materialize.toast('Added the ' + context.display_name + ' integration to your account.', 4000);
 		                        $('#integration-configurations-modal').modal('hide');
 		                        context.spliceAllIntegrations(index)
