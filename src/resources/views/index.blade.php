@@ -121,9 +121,9 @@
                 installed: {!! !empty($installed) ? json_encode($installed) : '{}' !!}
             },
             mounted: function () {
-            	console.log(this.integrations_my);
+            	//console.log(this.integrations_my);
             	//console.log(this.integrations_all);
-            	console.log(this.installed);
+            	//console.log(this.installed);
                 //this.searchAppStore();
                 //console.log(this.integrations_my.length)
                 //console.log(Object.keys(this.integrations_all).length)
