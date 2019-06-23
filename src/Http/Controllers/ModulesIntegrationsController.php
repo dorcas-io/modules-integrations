@@ -21,7 +21,7 @@ class ModulesIntegrationsController extends Controller {
             'page' => ['title' => config('modules-integrations.title')],
             'header' => ['title' => config('modules-integrations.title')],
             'selectedMenu' => 'addons',
-            'submenuConfig' => 'navigation-menu.modules-integrations.sub-menu',
+            'submenuConfig' => 'navigation-menu.addons.sub-menu.modules-integrations.sub-menu',
             'submenuAction' => ''
         ];
     }
