@@ -11,10 +11,10 @@ class ModulesIntegrationsServiceProvider extends ServiceProvider {
 		$this->loadViewsFrom(__DIR__.'/resources/views', 'modules-integrations');
 		$this->publishes([
 			__DIR__.'/config/modules-integrations.php' => config_path('modules-integrations.php'),
-		], 'config');
+		], 'dorcas-modules');
 		/*$this->publishes([
 			__DIR__.'/assets' => public_path('vendor/modules-integrations')
-		], 'public');*/
+		], 'dorcas-modules');*/
 	}
 
 	public function register()
