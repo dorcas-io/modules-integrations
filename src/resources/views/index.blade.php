@@ -31,12 +31,15 @@
                          		<h4>@{{ integration.display_name }}</h4>
                          		<div class="text-muted">@{{ integration.description }}</div>
                          		<div class="d-flex align-items-center pt-5 mt-auto">
+											{{-- dd(config('dorcas')['integrations'][2]['configurations'][0]['token_value'])  --}}
+											@php 
+											  $token = config('dorcas')['integrations'][2]['configurations'][0]['token_value'];
+											@endphp
                          			<div>
                          				<a v-if="integration.type_integration=='keys'" href="#" v-on:click.prevent="configureIntegration" data-list="my" :data-index="index" :data-display-name="integration.display_name" :data-name="integration.name" :data-display-name="integration.display_name" :data-type="integration.type" :data-type-integration="integration.type_integration" class="btn btn-sm btn-outline-primary">Configuration</a>
-
                          				<a v-if="integration.type_integration=='oauth2' && authRequirements(index)=='token_absent'" v-on:click.prevent="authenticateIntegration" :data-index="index" :data-display-name="integration.display_name" :data-name="integration.name" :data-display-name="integration.display_name" :data-type="integration.type" :data-type-integration="integration.type_integration" href="#" class="btn btn-sm btn-outline-primary">Authenticate</a>
+												 <a v-if="integration.type_integration=='app_token'" target="_blank" href="{{ env('EXTERNAL_LINK').'?app_token='.$token}}" :data-index="index" :data-display-name="integration.display_name" :data-name="integration.name" :data-display-name="integration.display_name" :data-type="integration.type" :data-type-integration="integration.type_integration" href="#" class="btn btn-sm btn-outline-primary">Authenticate</a>
                          				<small v-if="integration.type_integration=='oauth2' && authRequirements(index)=='token_absent'" class="d-block text-muted">Click <strong>Authenticate</strong> to grant Hub permission from Hubspot</small>
-
                          				<small v-if="integration.type_integration=='oauth2' && authRequirements(index)=='token_present'" class="d-block text-muted">Installed and <strong>Authenticated</strong></small>
                          			</div>
                          			<div class="ml-auto text-muted">
@@ -76,7 +79,7 @@
                          				<!-- <small class="d-block text-muted">3 days ago</small> -->
                          			</div>
                          			<div class="ml-auto text-muted">
-                         				<a href="#" v-if="integration.type_integration=='keys'" v-on:click.prevent="configureIntegration" data-list="all" :data-index="index" :data-display-name="integration.display_name" :data-name="integration.name" :data-display-name="integration.display_name" :data-type="integration.type" :data-type-integration="integration.type_integration" class="btn btn-sm btn-outline-success" v-html="installLabel(integration.type_integration)"></a>
+                         				<a href="#" v-if="integration.type_integration=='keys' || integration.type_integration=='app_token'" v-on:click.prevent="configureIntegration" data-list="all" :data-index="index" :data-display-name="integration.display_name" :data-name="integration.name" :data-display-name="integration.display_name" :data-type="integration.type" :data-type-integration="integration.type_integration" class="btn btn-sm btn-outline-success" v-html="installLabel(integration.type_integration)"></a>
                          				<a href="#" v-if="integration.type_integration=='oauth2' && !installing" v-on:click.prevent="installIntegration" data-list="all" :data-index="index" :data-display-name="integration.display_name" :data-name="integration.name" :data-display-name="integration.display_name" :data-type="integration.type" :data-type-integration="integration.type_integration" class="btn btn-sm btn-outline-success" v-html="installLabel(integration.type_integration)"></a>
                          			</div>
                          		</div>
@@ -188,6 +191,7 @@
                 		//console.log(auth_url.value)
                 		window.open(auth_url.value)
                 },
+					 
 
                 configureIntegration: function ($event) {
                 		let index = $event.target.getAttribute('data-index');
