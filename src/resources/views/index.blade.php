@@ -33,7 +33,7 @@
                          		<div class="d-flex align-items-center pt-5 mt-auto">
 											{{-- dd(config('dorcas')['integrations'][2]['configurations'][0]['token_value'])  --}}
 											@php 
-											  $token = config('dorcas')['integrations'][2]['configurations'][0]['token_value'];
+											  $token = config('dorcas')['integrations'][2]['configurations'][0]['token_value'] ?? null;
 											@endphp
                          			<div>
                          				<a v-if="integration.type_integration=='keys'" href="#" v-on:click.prevent="configureIntegration" data-list="my" :data-index="index" :data-display-name="integration.display_name" :data-name="integration.name" :data-display-name="integration.display_name" :data-type="integration.type" :data-type-integration="integration.type_integration" class="btn btn-sm btn-outline-primary">Configuration</a>
@@ -64,7 +64,31 @@
 	        </div>
 	        <div class="tab-pane container" id="integrations-all">
 	            <br/>
-	            
+				<div class="row">
+					<div class="col s12">
+						@component('layouts.blocks.tabler.alert-with-buttons')
+							@slot('title')
+								 Configuration Integration  Guide
+							@endslot
+						  <h5>Paytsack Integration Guide</h5>
+							<ul>
+								<li>Goto Paystack dashboard , copy live secret key and live public key</li>
+								<li>Click on configure Integration to add the public and secret live keys you copied from paystack</li>
+							</ul>
+
+								<h5>Flutterwave Integration Guide</h5>
+								<ul>
+									<li>Goto Flutterwave  dashboard , copy live secret key and live public key</li>
+									<li>Click on configure Integration to add the public and secret live keys you copied from flutterwave</li>
+								</ul>
+							@slot('buttons')
+{{--								<button v-on:click.prevent="resendVerification" class="btn btn-secondary" :class="{'btn-loading':verifying}" type="button">Send Verification Email</button>--}}
+							@endslot
+						@endcomponent
+					</div>
+
+				</div>
+				<br>
 		        <div class="container" id="listing_allintegrations">
 		            <div class="row mt-3" v-if="!emptyAllIntegrations">
 
