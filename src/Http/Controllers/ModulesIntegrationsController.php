@@ -80,7 +80,7 @@ class ModulesIntegrationsController extends Controller {
         $configurations = $request->has('configurations') ? $request->configurations : [];
         # set the configurations
 
-        $integrationId = $request->has('integration_id') ? $request->input('integration_id') : null;
+        $integrationId = $request->has('integration_id') && !empty($request->input('integration_id')) ? $request->input('integration_id') : null;
 
         $resource = $sdk->createIntegrationResource($integrationId)->addBodyParam('type', $request->input('type'))
                                                     ->addBodyParam('name', $request->input('name'))

@@ -226,6 +226,7 @@
             		}
 
 		            let display_name = integration.display_name;
+					let integration_id = context.showIntegrationId ? integration.id : null;
 		            let integration_name = integration.name;
 		            let integration_type = integration.type;
 		            let integration_configurations = integration.configurations;
@@ -234,7 +235,7 @@
 		            //console.log(integration_configurations)
 		            Swal.fire({
 		                title: "Are you sure?",
-		                text: "You are about to " + act +" the " + display_name + " integration.",
+		                text: "You are about to " + act + " the " + display_name + " integration.",
 		                type: "info",
 		                showCancelButton: true,
 		                confirmButtonText: "Yes, " + act +" it!",
@@ -242,6 +243,7 @@
 		                preConfirm: (install_integration) => {
 		                	this.installing = true;
 				            return axios.post("/mit/integrations", {
+								integration_id: integration_id,
 				                type: integration_type,
 				                name: integration_name,
 				                configurations: integration_configurations
