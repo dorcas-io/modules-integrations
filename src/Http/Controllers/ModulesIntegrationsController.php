@@ -29,6 +29,7 @@ class ModulesIntegrationsController extends Controller {
     public function index(Request $request, Sdk $sdk)
     {
         $availableIntegrations = config('dorcas.integrations');
+        // dd($availableIntegrations );
         # get all the available integrations
         $integrations = collect([]);
         # the installed integrations
