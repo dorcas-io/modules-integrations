@@ -10,6 +10,7 @@ use App\Http\Controllers\HomeController;
 use Hostville\Dorcas\Sdk;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Crypt;
 use App\Exceptions\RecordNotFoundException;
 
 class ModulesIntegrationsController extends Controller {
@@ -76,10 +77,18 @@ class ModulesIntegrationsController extends Controller {
             'name' => 'required|string|max:50',
             'configurations' => 'nullable|array',
         ]);
-
         # validate the request
+
         $configurations = $request->has('configurations') ? $request->configurations : [];
         # set the configurations
+
+        $configurations = collect($configurations)->map(function ($config) {
+            if ( isset($config['value']) && !empty($config['value']) ) {
+                $config['value'] = Crypt::encryptString($config['value']);
+            }
+            return $config;
+        })->toArray();
+        # encrypt values
 
         $integrationId = $request->has('integration_id') && !empty($request->input('integration_id')) ? $request->input('integration_id') : null;
 
